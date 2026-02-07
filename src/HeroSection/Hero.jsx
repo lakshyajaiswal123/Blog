@@ -37,7 +37,7 @@ export default function Hero() {
     
       {/* Container */}
       <div className=" flex flex-col lg:flex-row items-stretch
-                        gap-y-4 lg:gap-4
+                        gap-y-13 lg:gap-4
                        bg-[#EEEDE9]
                         max-w-[1260px] mx-auto
                         px-2 lg:px-6
@@ -76,8 +76,7 @@ export default function Hero() {
                       px-3 py-1
                       text-xs sm:text-sm
                       whitespace-nowrap
-                      leading-6
-                    " >
+                      leading-6 " >
                     {tag}
                   </span>
                 ))}
@@ -86,11 +85,11 @@ export default function Hero() {
             </div>
 
             {/* Right-section */}
-            <div className=" flex-1 flex items-center justify-center">
+            <div className=" flex-1 flex items-center justify-center md:p-0 pb-5">
               <img
                 src={Banner}
                 alt="Hero Banner"
-                className="w-full max-w-[598px] h-auto object-cover " />
+                className="w-full md:max-w-[598px] h-auto object-cover " />
             </div>
 
           </React.Fragment>
