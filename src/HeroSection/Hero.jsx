@@ -13,26 +13,19 @@ export default function Hero() {
 
 
       <div className="max-w-[1260px] mx-auto px-1 mb-5 text-xs text-[#686868] font-DM-Sans">
+     
        <span>  
-         / Blog   / Data Science 
-         {/* <NavLink
-              to="/Blog" reloadDocument 
-              className={({ isActive }) =>
-                isActive ? "text-[#D2B48C]" : "text-black"
-              }
-            >
-             / Blog     
-            </NavLink>
+  <NavLink to="/blog" className="hover:text-purple-600">
+    / Blog
+  </NavLink>
 
-             <NavLink
-              to="/DataScience" reloadDocument 
-              className={({ isActive }) =>
-                isActive ? "text-[#D2B48C]" : "text-black"
-              }
-            >
-             / Data Science 
-            </NavLink> */}
+  <span> / </span>
+
+  <NavLink to="/data-science" className="hover:text-purple-600">
+    Data Science
+  </NavLink>
         </span>
+        
       </div>
     
       {/* Container */}

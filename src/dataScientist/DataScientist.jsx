@@ -156,73 +156,71 @@ export default function DataScientist() {
           {/* ---------------- Right Section -sidebar ------------ */}
 
       {/* ---------------- THE CENTERED BORDER DIV ------------ */}
-          <div className="w-full h-[1px] mx-3 bg-[#D9D9D9] md:w-[1px] md:h-auto md:my-0 md:mx-12 shrink-0"></div>
+<div className="w-full h-[1px] mx-3 bg-[#D9D9D9]
+                md:w-[1px] md:h-auto md:mx-12 shrink-0 " />
 
-            {/* Right-section Container */}
-            <div className="flex flex-col gap-y-5 sticky top-6 pt-14">
-             
-              {/* Keep in Touch CTA-section */}
-              <div className="bg-[#EEEDE9] p-4">
+{/* RIGHT Section */}
+<div className="w-full lg:w-[395px] shrink-0 pt-15">
 
-                <h3 className="font-semibold font-DM-Sans mb-3 text-[20px]">
-                  Let’s keep in touch!
-                </h3>
+  <div className="sticky top-20 flex flex-col gap-y-5">
 
-                {/* CTA-section */}
-                <button
-                  className="w-full bg-[#FFD21F] py-2 cursor-pointer 
-                 font-semibold font-poppins text-[#0D0F12] 
-                 transition-all border-1 border-[#0D0F12]
-                hover:-translate-y-1 hover:-translate-x-1
-                 hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]"
-                >
-                  Subscribe
-                </button>
-              </div>
+    {/* Keep in Touch */}
+    <div className="flex flex-col gap-y-3 bg-[#EEEDE9] p-8">
+      <h3 className=" font-DM-Sans text-[20px] ">
+        <span>Let’s keep in touch!</span>
+      </h3>
 
-              {/* Content in your Story-section */}
-              {ScrollableContent.map((content, index) => (
-                <div
-                  key={index}
-                  className=" hidden lg:block bg-[#EEEDE9] p-2 max-w-[395px] font-DM-Sans">
+      <button className="w-full bg-[#FFD21F] py-2 cursor-pointer 
+        font-semibold font-poppins text-[#0D0F12] 
+        transition-all border border-[#0D0F12]
+        hover:-translate-y-1 hover:-translate-x-1
+        hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
+        Subscribe
+      </button>
+    </div>
 
-                  {/* Content Heading */}
-                  <h3 className="font-bold font-DM-Sans text-[#0D0F12] py-2 ">
-                    <span className="px-2">{content.heading}</span>
-                  </h3>
+   {/* Story */}
+{ScrollableContent.map((content, index) => (
+  <div
+    key={index}
+    className="hidden lg:block bg-[#EEEDE9] p-4 font-DM-Sans max-w-[395px]"
+  >
+    {/* Heading */}
+    <h3 className="font-bold text-[20px] mb-4">
+      {content.heading}
+    </h3>
 
-                  <ul className="space-y-3 text-sm">
-                    {storyItems.map((item, index) => (
-                      <li
-                        key={index}
-                        onClick={() => handleClick(item.ref, index)}
-                        className={`
-                        cursor-pointer pl-2 transition-all
-                        hover:text-purple-600 text-[#0D0F12]
-                        ${
-                          activeIndex === index
-                            ? "border-l-3 border-purple-500 text-purple-600 font-medium"
-                            : "border-l-2 border-transparent"
-                        }
-                      `}
-                      >
-                        {item.title}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+    {/* List */}
+    <ul className="flex flex-col gap-y-5 text-[14px]">
+      {storyItems.map((item, i) => (
+        <li
+          key={i}
+          onClick={() => handleClick(item.ref, i)}
+          className={`
+            cursor-pointer pl-3 transition-all duration-200
+            hover:text-[#7833FE]
+            ${
+              activeIndex === i
+                ? "border-l-4 border-[#7833FE]  text-[#7833FE] font-medium"
+                : "border-l-4 border-transparent text-[#686868]"
+            }
+          `}
+        >
+          {item.title}
+        </li>
+      ))}
+    </ul>
+  </div>
+))}
 
-              {/* Data Analytics-Banner */}
-              <div className="hidden lg:block">
-                <img
-                  src={dataAnalytics}
-                  className="w-full h-full object-cover"
-                  alt="Data Analytics Banner"
-                />
-              </div>
+    {/* Banner */}
+    <div className="hidden lg:block">
+      <img src={dataAnalytics} className="w-full object-cover" />
+    </div>
 
-            </div>
+  </div>
+</div>
+
 
           </div>
         </div>

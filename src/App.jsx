@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
-import Hero from './HeroSection/Hero'
-import DataScientist from './dataScientist/DataScientist'
+import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Blog from './blogPage/Blog';
+import Home from './homePage/Home';
+import DataScience from './dataSciencePage/DataScience';
 
 
 
@@ -8,8 +10,16 @@ import DataScientist from './dataScientist/DataScientist'
 export default function App() {
   return (
     <div>
-      <Hero/>
-      <DataScientist/>  
+  
+
+  <BrowserRouter>
+      <Routes>
+
+          <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/data-science" element={<DataScience />} />
+      </Routes>
+    </BrowserRouter>
     
     </div>
   )
