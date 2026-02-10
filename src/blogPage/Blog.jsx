@@ -1,10 +1,12 @@
 import React from 'react'
-import BlogHero from './blogHero/BlogHero'
+import BlogHero from './blogHeroPage/BlogHero'
+import BlogPost from './blogPostPage/BlogPost'
 
 export default function Blog() {
   return (
     <div>
-     <BlogHero/>
+      <BlogHero/>
+      <BlogPost/>
     </div>
   )
 }
