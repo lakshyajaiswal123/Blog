@@ -5,22 +5,22 @@ export default function BlogHero() {
   const item = BlogHeroData;
 
   return (
-    <section className="w-full py-8 lg:py-12 p-3">
-      <div className="max-w-[1260px] mx-auto font-DM-Sans">
+    <section className="w-full py-4 lg:py-6 px-5 bg-[#EAEAEA] ">
+      <div className="max-w-[1208px] mx-auto font-DM-Sans">
 
-        {/* Top Label */}
+        {/* Top Label Blog */}
         <span className="px-1 mb-5 text-xs text-[#686868]">
           Blog
         </span>
 
         {/* Container */}
-        <div className="max-w-[1260px] mx-auto mt-5 border-b border-[#D9D9D9]">
+        <div className="max-w-[1260px] mx-auto mt-5 border-b border-[#D9D9D9] ">
 
           {/* Main Flex */}
-          <div className="flex flex-col lg:flex-row gap-3">
+          <div className="flex flex-col lg:flex-row gap-3 ">
 
             {/* ------------------- LEFT SECTION ------------------- */}
-            <div className="max-w-[815px] flex-1">
+            <div className="lg:max-w-[815px] flex-1">
               <div className="flex flex-col gap-y-6">
 
                 {/* Banner */}
@@ -31,7 +31,7 @@ export default function BlogHero() {
                 />
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-4 text-[#0D0F12]">
                   {item.tags?.map((tag, i) => (
                     <span
                       key={i}
@@ -54,7 +54,7 @@ export default function BlogHero() {
 
             {/* -------- Center Border-------------------*/}
             <div className="h-px w-full bg-[#D9D9D9]
-                md:w-[1px] md:h-auto md:mx-3
+                md:w-[1px] lg:h-[656px] md:mx-3 
                 shrink-0 "/>
 
             {/* ------------------- RIGHT SECTION ------------------- */}
@@ -79,7 +79,7 @@ export default function BlogHero() {
                   />
 
                   {/* Points */}
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-4 text-[#0D0F12]">
                     {topics.points?.map((point, i) => (
                       <span
                         key={i}

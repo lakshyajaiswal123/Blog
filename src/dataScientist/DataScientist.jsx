@@ -34,21 +34,21 @@ export default function DataScientist() {
   };
 
   return (
-    <section className="border-t border-[#D9D9D9]">
+    <section className="border-t border-[#D9D9D9] bg-[#EAEAEA]">
       
       {/* Container */}
       <div className="max-w-[1260px] mx-auto ">
      
         {/* Left and Right-section */}
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col lg:flex-row md:p-0 p-2">
 
           {/* ---------------- Left Section ------------*/}
-         <div className="flex-1 py-8 space-y-6 pr-0 lg:pr-5 md:px-6 lg:px-0">
+         <div className="flex-1 py-8 space-y-6 pr-0 lg:pr-5 md:px-6 lg:px-0 ">
            
              {/* Summary-section */}
 
               {/* Conatiner */}
-              <div className="max-w-[771px]  md:p-0 p-3">
+              <div className="max-w-[771px]  md:p-0 p-3 ">
 
            
                    {/* Top Heading */}
@@ -156,7 +156,7 @@ export default function DataScientist() {
           {/* ---------------- Right Section -sidebar ------------ */}
 
       {/* ---------------- THE CENTERED BORDER DIV ------------ */}
-<div className="w-full h-[1px] mx-3 bg-[#D9D9D9]
+<div className="h-[1px] mx-3 bg-[#D9D9D9]
                 md:w-[1px] md:h-auto md:mx-12 shrink-0 " />
 
 {/* RIGHT Section */}
