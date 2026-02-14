@@ -76,7 +76,7 @@ const filteredPosts = BlogPostData.filter(post => {
 
   return (
     <section className="bg-[#EAEAEA]">
-    <div className="max-w-[1208px] mx-auto px-5 xl:px-0 py-1 min-h-screen ">
+    <div className="max-w-[1208px] mx-auto px-4 xl:px-0 py-1 min-h-screen ">
 
       {/* ---------------- CATEGORY FILTER BUTTONS ---------------- */}
       <div className="w-full max-w-6xl mt-8">
@@ -99,8 +99,8 @@ const filteredPosts = BlogPostData.filter(post => {
 
                   ${
                     activeCategory === category
-                      ? "bg-[#7833FE] text-white border-[#0D0F12]   shadow-[5px_5px_0px_black] -translate-y-1"
-                      : "bg-[#EEEDE9] text-[#0D0F12] border-[#EEEDE9] hover:bg-[#7833FE] hover:text-[#FFFFFF] hover:border-[#0F0D12] transition-all duration-300"
+                      ?" w-auto py-2.5 flex items-center justify-center cursor-pointer text-sm transition-all duration-300 ease-in-out lg:hover:bg-[#7833FE] lg:hover:text-white lg:hover:border-[#0D0F12] bg-[#7833FE] text-white font-semibold border border-[#0D0F12] -translate-x-1 -translate-y-1 shadow-[4px_4px_0px_#0d0f12] px-4 rounded-full shrink-0 "
+                      :" w-auto py-2.5 flex items-center justify-center cursor-pointer text-sm text-[#0D0F12] font-DM-Sans transition-all duration-300 ease-in-out bg-[#EEEDE9] border border-gray-300 hover:bg-[#7833FE] lg:hover:text-white lg:hover:border-[#0D0F12] px-4 rounded-full shrink-0"
                   }
                 `}
               >
@@ -111,111 +111,45 @@ const filteredPosts = BlogPostData.filter(post => {
         </div>
       </div>
 
-      {/* ---------------- SEARCH and SORT section ---------------- */}
-      <div className="flex flex-row justify-end gap-2 md:gap-6 pt-6">
-
-        {/* Search Input Field*/}
-        <div className="w-full md:max-w-[326px] flex items-center font-DM-Sans">
+    {/* ---------------- SEARCH and SORT section ---------------- */}
+        <div className="flex flex-row justify-end gap-2 md:gap-6 pt-6">
+           {/* Search Input Field*/}
+        <div className=" md:max-w-[326px] max-w-[203px] flex items-center justify-end font-DM-Sans">
           <input
             type="text"
             placeholder="Search the topic"
             value={tempSearch}
             onChange={(e) => setTempSearch(e.target.value)}
             className="
-              h-[40px] md:px-6 px-2 bg-[#EEEDE9] text-sm
-              text-[#686868] placeholder-[#686868] outline-none
+              h-[40px] md:px-8 px-2  md:max-w-[232px] bg-[#EEEDE9] text-sm
+              text-[#686868] placeholder-[#686868] outline-none border border-[#A7A7A7]
             "
           />
-
-          {/* DeskTop Search Button */}
-          <button
-            onClick={() => setSearchQuery(tempSearch)}
-            className="
-              h-[40px] hidden sm:block px-8
-              bg-[#7833FE] text-white font-bold text-sm
-              border border-[#0D0F12]
-            "
-          >
-            Search
-          </button>
-        
-        {/* Mobile Section Button Search */}
-          <button
-            onClick={() => setSearchQuery(tempSearch)}
-           className="sm:hidden flex items-center justify-center
-              h-[40px] w-[45px] min-w-[45px]
-              bg-[#7833FE] border border-[#0D0F12]" >
-                
-                {/* Search Logo */}
-            <img src={SearchIcon} alt="search" />
-          </button>
-        </div>
-
-        {/* Sort dropdown Section */}
-        <div className="relative w-full max-w-[172px] border border-[#A7A7A7]">
-
-          <button
-            onClick={() => setSortOpen((p) => !p)}
-            className="
-              flex items-center justify-between
-              h-[40px] w-full p-5 cursor-pointer
-              bg-[#EEEDE9] text-[#0D0F12]
-            "
-          >
-            <span className="font-DM-Sans text-[14px] md:text-[17px]">
-              Sort
-            </span>
-
-            {/* Arrow Image */}
-            <img src={ArrowDown}
-             className={` w-[13px] h-[27px] transition-transform duration-300
-                ${sortOpen ? "rotate-180" : "rotate-0"}`}
-              alt="sort" />
-          </button>
-
-          {/* Dropdown */}
-          <div
-            className={`
-              absolute top-full left-0 w-full bg-[#FFFFFF] shadow-lg z-50
-              transition-all duration-200  mt-[1px]
-              ${sortOpen ? "opacity-100 visible" : "opacity-0 invisible"}
-            `}
-          >
-              {/* Newest Button */}
-            <div
-              onClick={() => {
-                setSortType("new");
-                setSortOpen(false);
-              }}
-              className="
-                px-3 md:px-6 py-[11px]
-                text-[12px] md:text-sm text-[#0F0D12]
-                font-DM-Sans whitespace-nowrap 
-                cursor-pointer hover:bg-[#7833FE] hover:text-white hover:font-bold
-              "
+                      {/* Mobile Section Button Search */}
+             <button
+              onClick={() => {setSearchQuery(tempSearch); setCurrentPage(1);}}
+              className="h-[40px] hidden sm:block px-8 bg-[#7833FE] text-white font-bold text-sm border border-[#0D0F12]"
             >
-              Newest first
-            </div>
+              Search
+            </button>
 
-              {/* Older Button */}
-            <div
-              onClick={() => {
-                setSortType("old");
-                setSortOpen(false);
-              }}
-              className="
-                px-3 md:px-6 py-[11px]
-                text-[12px] md:text-sm text-[#0F0D12]
-                font-DM-Sans whitespace-nowrap
-                cursor-pointer hover:bg-[#7833FE] hover:text-white hover:font-bold
-              "
-            >
-              Oldest first
-            </div>
+            <button onClick={() => {setSearchQuery(tempSearch); setCurrentPage(1);}} className="sm:hidden flex items-center justify-center h-[40px] w-[45px] min-w-[45px] bg-[#7833FE] border border-[#0D0F12]">
+              <img src={SearchIcon} alt="search" />
+            </button>
           </div>
 
+              {/* Sort Dropdown Section */}
+          <div className="relative w-full max-w-[172px]  border border-[#A7A7A7]">
+            <button onClick={() => setSortOpen((p) => !p)} className="flex items-center justify-between h-[40px] w-full p-5 cursor-pointer bg-[#EEEDE9] text-[#0D0F12]">
+              <span className="font-DM-Sans text-[14px] md:text-[17px]">Sort</span>
+              <img src={ArrowDown} className={`w-[13px] h-[27px] transition-transform duration-300 ${sortOpen ? "rotate-180" : "rotate-0"}`} alt="sort" />
+            </button>
+            <div className={`absolute top-full left-0 w-full bg-[#FFFFFF] shadow-lg z-50 transition-all duration-200 ${sortOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+              <div onClick={() => { setSortType("new"); setSortOpen(false); }} className="px-3 md:px-6 py-[11px] text-[12px] md:text-sm text-[#0F0D12] font-DM-Sans cursor-pointer hover:bg-[#7833FE] hover:text-white hover:font-bold">Newest first</div>
+              <div onClick={() => { setSortType("old"); setSortOpen(false); }} className="px-3 md:px-6 py-[11px] text-[12px] md:text-sm text-[#0F0D12] font-DM-Sans cursor-pointer hover:bg-[#7833FE] hover:text-white hover:font-bold">Oldest first</div>
+            </div>
+          </div>
         </div>
-      </div>
 
       {/* ---------------- BLOG CARDS ---------------- */}
       <div className="w-full mt-10">
@@ -247,7 +181,7 @@ const filteredPosts = BlogPostData.filter(post => {
                 {topics.points?.map((point, i) => (
                   <span
                     key={i}
-                    className="bg-[#D9D9D9] px-2 py-2 text-[12px] font-DM-Sans"
+                    className="bg-[#D9D9D9] px-6 md:px-2 py-2 text-[12px] font-DM-Sans"
                   >
                     {point}
                   </span>
@@ -255,7 +189,7 @@ const filteredPosts = BlogPostData.filter(post => {
               </div>
 
               <h2 className="
-                max-w-[292px] text-[20px] leading-6.5
+                max-w-[292px] text-[16px] md:text-[20px] leading-5.5 md:leading-6.5
                 font-DM-Sans text-[#0D0F12] cursor-pointer
               ">
                 {topics.SubHeading}
@@ -276,7 +210,7 @@ const filteredPosts = BlogPostData.filter(post => {
             <button
               key={num}
               onClick={() => paginate(num)}
-              className={`w-10 h-10 flex items-center justify-center text-sm  transition-all
+              className={` w-8 h-8.5 md:w-10 md:h-10 flex items-center justify-center text-sm  transition-all
                 ${currentPage === num ? "bg-[#7833FE] text-white" : "bg-[#EEEDE9] text-[#0D0F12] hover:bg-gray-300"}`}
             >
               {num}

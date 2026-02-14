@@ -5,7 +5,7 @@ export default function BlogHero() {
   const item = BlogHeroData;
 
   return (
-    <section className="w-full py-4 lg:py-6 px-5 bg-[#EAEAEA] ">
+    <section className="w-full py-4 lg:py-6 px-4 md:px-5 bg-[#EAEAEA] ">
       <div className="max-w-[1208px] mx-auto font-DM-Sans">
 
         {/* Top Label Blog */}
