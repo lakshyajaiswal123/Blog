@@ -15,7 +15,7 @@ export default function App() {
   <BrowserRouter>
       <Routes>
 
-          <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/data-science" element={<DataScience />} />
       </Routes>

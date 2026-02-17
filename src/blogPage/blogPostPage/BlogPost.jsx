@@ -48,9 +48,8 @@ const filteredPosts = BlogPostData.filter(post => {
     post.category?.includes?.(activeCategory);
 
     //SubHeading ki last word ko search krenge aur sreach qurery k dono ko matche krenge tab aage jana dega
-  const matchSearch =
-    post.SubHeading.toLowerCase()
-      .includes(searchQuery.toLowerCase());
+  const matchSearch = post.SubHeading.toLowerCase()
+                     .includes(searchQuery.toLowerCase());
 
   return matchCategory && matchSearch;
 });
@@ -74,6 +73,15 @@ const filteredPosts = BlogPostData.filter(post => {
     window.scrollTo({ top: 500, behavior: 'smooth' }); // Grid par scroll back karega
   };
 
+
+  // UPDATED: Dynamic Pagination Group Logic
+  const getPaginationGroup = () => {
+    let start = Math.floor((currentPage - 1) / 4) * 4;
+    return new Array(Math.min(4, totalPages - start))
+      .fill()
+      .map((_, idx) => start + idx + 1);
+  };
+
   return (
     <section className="bg-[#EAEAEA]">
     <div className="max-w-[1208px] mx-auto px-4 xl:px-0 py-1 min-h-screen ">
@@ -90,7 +98,7 @@ const filteredPosts = BlogPostData.filter(post => {
             {Categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => {setActiveCategory(category); setCurrentPage(1);}}
                 className={`
                   whitespace-nowrap text-sm sm:text-[14px]
                   py-2 px-3 rounded-[35px] border
@@ -100,7 +108,7 @@ const filteredPosts = BlogPostData.filter(post => {
                   ${
                     activeCategory === category
                       ?" w-auto py-2.5 flex items-center justify-center cursor-pointer text-sm transition-all duration-300 ease-in-out lg:hover:bg-[#7833FE] lg:hover:text-white lg:hover:border-[#0D0F12] bg-[#7833FE] text-white font-semibold border border-[#0D0F12] -translate-x-1 -translate-y-1 shadow-[4px_4px_0px_#0d0f12] px-4 rounded-full shrink-0 "
-                      :" w-auto py-2.5 flex items-center justify-center cursor-pointer text-sm text-[#0D0F12] font-DM-Sans transition-all duration-300 ease-in-out bg-[#EEEDE9] border border-gray-300 hover:bg-[#7833FE] lg:hover:text-white lg:hover:border-[#0D0F12] px-4 rounded-full shrink-0"
+                      :" w-auto py-2.5 flex items-center justify-center cursor-pointer text-sm text-[#0D0F12] font-DM-Sans transition-all duration-300 ease-in-out bg-[#EEEDE9] border border-gray-300 hover:bg-[#7833FE] hover:border-[#0D0F12] hover:text-white px-4 rounded-full shrink-0"
                   }
                 `}
               >
@@ -120,11 +128,9 @@ const filteredPosts = BlogPostData.filter(post => {
             placeholder="Search the topic"
             value={tempSearch}
             onChange={(e) => setTempSearch(e.target.value)}
-            className="
-              h-[40px] md:px-8 px-2  md:max-w-[232px] bg-[#EEEDE9] text-sm
-              text-[#686868] placeholder-[#686868] outline-none border border-[#A7A7A7]
-            "
-          />
+            className="h-[40px] md:px-8 px-2  md:max-w-[232px] bg-[#EEEDE9] text-sm
+              text-[#686868] placeholder-[#686868] outline-none border border-[#A7A7A7]  "
+              />
                       {/* Mobile Section Button Search */}
              <button
               onClick={() => {setSearchQuery(tempSearch); setCurrentPage(1);}}
@@ -144,7 +150,9 @@ const filteredPosts = BlogPostData.filter(post => {
               <span className="font-DM-Sans text-[14px] md:text-[17px]">Sort</span>
               <img src={ArrowDown} className={`w-[13px] h-[27px] transition-transform duration-300 ${sortOpen ? "rotate-180" : "rotate-0"}`} alt="sort" />
             </button>
-            <div className={`absolute top-full left-0 w-full bg-[#FFFFFF] shadow-lg z-50 transition-all duration-200 ${sortOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+
+            {/* dropdowhn button */}
+            <div className={`absolute top-full left-0 w-full mt-[2px] bg-[#FFFFFF] shadow-lg z-50 transition-all duration-200 ${sortOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
               <div onClick={() => { setSortType("new"); setSortOpen(false); }} className="px-3 md:px-6 py-[11px] text-[12px] md:text-sm text-[#0F0D12] font-DM-Sans cursor-pointer hover:bg-[#7833FE] hover:text-white hover:font-bold">Newest first</div>
               <div onClick={() => { setSortType("old"); setSortOpen(false); }} className="px-3 md:px-6 py-[11px] text-[12px] md:text-sm text-[#0F0D12] font-DM-Sans cursor-pointer hover:bg-[#7833FE] hover:text-white hover:font-bold">Oldest first</div>
             </div>
@@ -162,12 +170,10 @@ const filteredPosts = BlogPostData.filter(post => {
           {currentItems.map((topics, index) => (
             <div
               key={index}
-              className="
-                flex flex-col md:gap-y-2 gap-y-5
+              className="flex flex-col md:gap-y-2 gap-y-5
                 w-full
                 sm:w-[calc(50%-12px)]
-                lg:w-[calc(33.333%-16px)]
-              "
+                lg:w-[calc(33.333%-16px)]"
             >
               <div className="w-full overflow-hidden">
                 <img
@@ -198,67 +204,73 @@ const filteredPosts = BlogPostData.filter(post => {
             </div>
           ))}
         </div>
-
       </div>
 
-              {/* --- One Page To NExt Page Section --- */}
-      <div className="py-10 flex flex-col md:gap-0 gap-y-4  sm:flex-row md:items-center justify-between font-DM-Sans">
-        <div className="flex items-center gap-2">
-         
-          {/* Page Buttons */}
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
-            <button
-              key={num}
-              onClick={() => paginate(num)}
-              className={` w-8 h-8.5 md:w-10 md:h-10 flex items-center justify-center text-sm  transition-all
-                ${currentPage === num ? "bg-[#7833FE] text-white" : "bg-[#EEEDE9] text-[#0D0F12] hover:bg-gray-300"}`}
-            >
-              {num}
-            </button>
-          ))}
-          
-          {totalPages > 4 && <div className="w-10 h-10 flex items-center justify-center bg-[#EEEDE9]">...</div>}
+             {/* --- DYNAMIC PAGINATION SECTION WITH BACK TO PAGE 1 --- */}
+        <div className="py-10 flex flex-col md:gap-0 gap-y-4 sm:flex-row md:items-center justify-between font-DM-Sans">
+          <div className="flex items-center gap-2">
+            
+            {/* AGAR PAGE 4 SE JYADA HAI, TOH "1" AUR "..." DIKHAO WAPAS JAANE KE LIYE */}
+            {currentPage > 4 && (
+              <>
+                <button
+                  onClick={() => paginate(1)}
+                  className="w-10 h-10 flex items-center justify-center text-sm bg-[#EEEDE9] text-[#0D0F12] hover:bg-gray-300 transition-all shadow-sm"
+                >
+                  1
+                </button>
+                <button
+                  onClick={() => paginate(getPaginationGroup()[0] - 1)}
+                  className="w-10 h-10 flex items-center justify-center bg-[#EEEDE9] text-[#0D0F12] hover:bg-gray-300 cursor-pointer"
+                >
+                  ...
+                </button>
+              </>
+            )}
+
+            {/* CURRENT DYNAMIC GROUP BUTTONS */}
+            {getPaginationGroup().map((num) => (
+              <button
+                key={num}
+                onClick={() => paginate(num)}
+                className={`w-10 h-10 flex items-center justify-center text-sm transition-all border border-transparent ${
+                  currentPage === num ? "bg-[#7833FE] text-white font-bold" : "bg-[#EEEDE9] text-[#0D0F12] hover:bg-gray-300"
+                }`}
+              >
+                {num}
+              </button>
+            ))}
+
+            {/* NEXT GROUP ELLIPSIS (...) */}
+            {totalPages > getPaginationGroup()[getPaginationGroup().length - 1] && (
+              <button
+                onClick={() => paginate(getPaginationGroup()[getPaginationGroup().length - 1] + 1)}
+                className="w-10 h-10 flex items-center justify-center bg-[#EEEDE9] text-[#0D0F12] hover:bg-gray-300 cursor-pointer"
+              >
+                ...
+              </button>
+            )}
+          </div>
+
+          <div className="text-[#0D0F12] text-sm sm:text-base font-DM-Sans">
+            Showing <span>{String(indexOfFirstPost + 1).padStart(2, '0')} – {String(Math.min(indexOfLastPost, sortedPosts.length)).padStart(2, '0')}</span> of <span>{sortedPosts.length}</span> results
+          </div>
         </div>
 
-        <div className="text-[#0D0F12] text-sm  font-DM-Sans ">
-          Showing <span className="">{String(indexOfFirstPost + 1).padStart(2, '0')} – {String(Math.min(indexOfLastPost, sortedPosts.length)).padStart(2, '0')}</span> of <span className="font-DM-Sans">{sortedPosts.length}</span> results
-        </div>
-      </div>
 
+{/* BACK TO TOP BUTTON */}
+        <button
+          onClick={scrollToTop}
+          className={`fixed bottom-10 left-5 md:left-7 z-[100] transition-all duration-300 flex items-center justify-center ${showButton ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-10 invisible"}`}
+        >
+          <div className="w-[55px] h-[55px] rounded-full flex items-center justify-center bg-[#7833FE] shadow-[0_0_20px_rgba(120,51,254,0.4)]">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 13L12 7L18 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M6 19L12 13L18 19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </button>
 
-    {/* BACK TO TOP BUTTON (PURPLE THEME) */}
-<button
-  onClick={scrollToTop}
-  className={`fixed bottom-10 left-5 md:left-7 z-[100] transition-all duration-300 flex items-center justify-center
-    ${showButton ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-10 invisible"}`}
->
-  {/* Yahan bg-[#7833FE] wahi purple hai jo aapke search button ka hai */}
-  <div className="w-[55px] h-[55px] rounded-full flex items-center justify-center bg-[#7833FE] 
-                  shadow-[0_0_20px_rgba(120,51,254,0.4)]  
-                  ">
-      
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {/* Upper Arrow */}
-          <path 
-            d="M6 13L12 7L18 13" 
-            stroke="white" 
-            strokeWidth="2" 
-         
-          />
-          {/* Lower Arrow */}
-          <path 
-            d="M6 19L12 13L18 19" 
-            stroke="white" 
-            strokeWidth="2" 
-             
-          />
-      </svg>
-  </div>
-</button>
-
-
-
-      
     </div>
     </section>
   );
